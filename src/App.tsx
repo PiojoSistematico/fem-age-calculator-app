@@ -3,13 +3,6 @@ import arrow from "./assets/images/icon-arrow.svg";
 import { calculateDifference } from "./helpers/calculateDifference";
 
 function App() {
-  /* let errorDay: boolean = false;
-  let errorMonth: boolean = false;
-  let errorYear: boolean = false;
-  let emptyDay: boolean = false;
-  let emptyMonth: boolean = false;
-  let emptyYear: boolean = false; */
-
   const [age, setAge] = useState(["--", "--", "--"]);
   const [validDay, setValidDay] = useState(true);
   const [validMonth, setValidMonth] = useState(true);
@@ -70,8 +63,54 @@ function App() {
       setValidYear(true);
       setEmptyYear(false);
     }
-
+    console.log(day, month, year);
     setAge(calculateDifference(day, month, year));
+
+    const validInput: boolean =
+      validDay == true &&
+      emptyDay == false &&
+      validDay == true &&
+      emptyDay == false &&
+      validDay == true &&
+      emptyDay == false;
+
+    if (validInput) {
+      const targetValues = calculateDifference(day, month, year);
+      const initialValues = [0, 0, 0];
+
+      // Animation duration (in milliseconds)
+      const duration = 1500;
+
+      // Animation start time
+      const startTime = performance.now();
+
+      // Animation function
+      function animateStep(timestamp: number) {
+        const progress = timestamp - startTime;
+
+        // Update the state variables based on the animation progress
+        const updatedValues = initialValues.map(
+          (initial, index) =>
+            initial +
+            ((Number(targetValues[index]) - initial) * progress) / duration
+        );
+
+        // Update the state variables with the animated values
+        setAge([
+          updatedValues[0].toString(),
+          updatedValues[1].toString(),
+          updatedValues[2].toString(),
+        ]);
+
+        // Continue the animation until the duration is reached
+        if (progress < duration) {
+          requestAnimationFrame(animateStep);
+        }
+      }
+
+      // Start the animation
+      requestAnimationFrame(animateStep);
+    }
   }
 
   return (
@@ -79,8 +118,22 @@ function App() {
       <form action="" onSubmit={handleSubmit} className="date-section">
         <section className="input-grid">
           <div className="custom-input">
-            <label htmlFor="">{"Day"}</label>
-            <input type="number" placeholder={"DD"} name="day" />
+            <label
+              className={
+                validDay == false || emptyDay == true ? "label-error" : ""
+              }
+              htmlFor=""
+            >
+              {"Day"}
+            </label>
+            <input
+              className={
+                validDay == false || emptyDay == true ? "input-error" : ""
+              }
+              type="number"
+              placeholder={"DD"}
+              name="day"
+            />
             <span className="error-message">
               {validDay ? null : "Must be a valid day"}
             </span>
@@ -89,8 +142,22 @@ function App() {
             </span>
           </div>
           <div className="custom-input">
-            <label htmlFor="">{"Month"}</label>
-            <input type="number" placeholder={"MM"} name="month" />
+            <label
+              className={
+                validMonth == false || emptyMonth == true ? "label-error" : ""
+              }
+              htmlFor=""
+            >
+              {"Month"}
+            </label>
+            <input
+              className={
+                validMonth == false || emptyMonth == true ? "input-error" : ""
+              }
+              type="number"
+              placeholder={"MM"}
+              name="month"
+            />
             <span className="error-message">
               {validMonth ? null : "Must be a valid month"}
             </span>
@@ -99,8 +166,22 @@ function App() {
             </span>
           </div>
           <div className="custom-input">
-            <label htmlFor="">{"Year"}</label>
-            <input type="number" placeholder={"YYYY"} name="year" />
+            <label
+              className={
+                validYear == false || emptyYear == true ? "label-error" : ""
+              }
+              htmlFor=""
+            >
+              {"Year"}
+            </label>
+            <input
+              className={
+                validYear == false || emptyYear == true ? "input-error" : ""
+              }
+              type="number"
+              placeholder={"YYYY"}
+              name="year"
+            />
             <span className="error-message">
               {validYear ? null : "Must be in the past"}
             </span>
@@ -119,16 +200,22 @@ function App() {
       </form>
 
       <section className="result-section">
-        <div>
-          <span className="result">{age[2] == "--" ? "--" : age[2]}</span>
+        <div className="gap">
+          <span className="result">
+            {age[2] == "--" ? "--" : Number(age[2]).toFixed(0)}
+          </span>
           <span className="description">years</span>
         </div>
-        <div>
-          <span className="result">{age[1] == "--" ? "--" : age[1]}</span>
+        <div className="gap">
+          <span className="result">
+            {age[1] == "--" ? "--" : Number(age[1]).toFixed(0)}
+          </span>
           <span className="description">months</span>
         </div>
-        <div>
-          <span className="result">{age[0] == "--" ? "--" : age[0]}</span>
+        <div className="gap">
+          <span className="result">
+            {age[0] == "--" ? "--" : Number(age[0]).toFixed(0)}
+          </span>
           <span className="description">days</span>
         </div>
       </section>

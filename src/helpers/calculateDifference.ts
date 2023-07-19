@@ -3,49 +3,39 @@ export function calculateDifference(
   month: string,
   year: string
 ): string[] {
-  if (year == "--" || month == "--" || day == "--") return ["--", "--", "--"];
+  if (year === "--" || month === "--" || day === "--")
+    return ["--", "--", "--"];
 
   const today: Date = new Date();
-  const dob: Date = new Date(
-    Number(year),
-    Number(month) - 1,
-    Number(day)
-  ); /* months index star at 0 */
+  const dob: Date = new Date(Number(year), Number(month) - 1, Number(day));
 
-  let yearsDifference: number = -99;
-  let monthsDifference: number = -99;
-  let daysDifference: number = -99;
+  // Check if the date provided is valid
+  if (isNaN(dob.getTime())) return ["--", "--", "--"];
 
-  //Get years
-  if (year != "--") yearsDifference = today.getFullYear() - dob.getFullYear();
+  let yearsDifference: number = today.getFullYear() - dob.getFullYear();
+  let monthsDifference: number = today.getMonth() - dob.getMonth();
+  let daysDifference: number = today.getDate() - dob.getDate();
 
-  //Get months
-  if (month != "--") {
-    if (today.getMonth() >= dob.getMonth()) {
-      monthsDifference = today.getMonth() - dob.getMonth();
-    } else {
-      yearsDifference = yearsDifference - 1;
-      monthsDifference = 12 + today.getMonth() - dob.getMonth();
-    }
+  // Adjust the differences if the current day/month is before the birthday
+  if (daysDifference < 0) {
+    monthsDifference -= 1;
+    const lastMonth = new Date(
+      today.getFullYear(),
+      today.getMonth() - 1,
+      today.getDate()
+    );
+    daysDifference = Math.floor(
+      (today.getTime() - lastMonth.getTime()) / (1000 * 60 * 60 * 24)
+    );
   }
-
-  //Get days
-  if (day != "--") {
-    if (today.getDate() >= dob.getDate()) {
-      daysDifference = today.getDate() - dob.getDate();
-    } else {
-      monthsDifference = monthsDifference - 1;
-      daysDifference = 31 + today.getDate() - dob.getDate();
-      if (monthsDifference < 0) {
-        monthsDifference = 11;
-        yearsDifference--;
-      }
-    }
+  if (monthsDifference < 0) {
+    yearsDifference -= 1;
+    monthsDifference += 12;
   }
 
   return [
-    daysDifference == -99 ? "--" : daysDifference.toString(),
-    monthsDifference == -99 ? "--" : monthsDifference.toString(),
-    yearsDifference == -99 ? "--" : yearsDifference.toString(),
+    daysDifference.toString(),
+    monthsDifference.toString(),
+    yearsDifference.toString(),
   ];
 }
