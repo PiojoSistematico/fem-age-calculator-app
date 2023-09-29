@@ -31,7 +31,7 @@ Users should be able to:
 ### Screenshot
 
 ![mobile](./public/mobile.png)
-![mobile](./public/desktop.png)
+![desktop](./public/desktop.png)
 
 ### Links
 
@@ -43,14 +43,28 @@ Users should be able to:
 
 - Semantic HTML5 markup
 - CSS custom properties
-- Flexbox
-- CSS Grid
 - Mobile-first workflow
 - React + Typescript
 
+### Technologies used
+
+<div >
+
+    <code><img width="50" src="https://user-images.githubusercontent.com/25181517/192158954-f88b5814-d510-4564-b285-dff7d6400dad.png" alt="HTML" title="HTML"/></code>
+
+    <code><img width="50" src="https://user-images.githubusercontent.com/25181517/183898674-75a4a1b1-f960-4ea9-abcb-637170a00a75.png" alt="CSS" title="CSS"/></code>
+
+    <code><img width="50" src="https://user-images.githubusercontent.com/25181517/183897015-94a058a6-b86e-4e42-a37f-bf92061753e5.png" alt="React" title="React"/></code>
+
+    <code><img width="50" src="https://user-images.githubusercontent.com/25181517/183890598-19a0ac2d-e88a-4005-a8df-1ee36782fde1.png" alt="TypeScript" title="TypeScript"/></code>
+
+    <code><img width="50" src="https://github.com/marwin1991/profile-technology-icons/assets/62091613/b40892ef-efb8-4b0e-a6b5-d1cfc2f3fc35" alt="Vite" title="Vite"/></code>
+
+</div>
+
 ### React + Typescript Front-End Master Series (Junior Challenges)
 
-If you are interested check out the other projects of the front end master challenges (Junior) that i solved with react + typescript
+If you are interested check out the other projects of the front end master challenges (Junior) that i solved with react + typescript (trying to learn both)
 
 - [fem-age-calculator-app](https://github.com/PiojoSistematico/fem-age-calculator-app/)
 - [fem-news-homepage](https://github.com/PiojoSistematico/fem-news-homepage/)

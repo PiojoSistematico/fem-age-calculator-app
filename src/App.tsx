@@ -63,18 +63,8 @@ function App() {
       setValidYear(true);
       setEmptyYear(false);
     }
-    console.log(day, month, year);
-    setAge(calculateDifference(day, month, year));
 
-    const validInput: boolean =
-      validDay == true &&
-      emptyDay == false &&
-      validDay == true &&
-      emptyDay == false &&
-      validDay == true &&
-      emptyDay == false;
-
-    if (validInput) {
+    if (day != "--" && month != "--" && year != "--") {
       const targetValues = calculateDifference(day, month, year);
       const initialValues = [0, 0, 0];
 
@@ -110,6 +100,8 @@ function App() {
 
       // Start the animation
       requestAnimationFrame(animateStep);
+    } else {
+      setAge(["--", "--", "--"]);
     }
   }
 
